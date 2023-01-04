@@ -29,6 +29,7 @@ h1 {
     height: 3rem;
     font-size: 2em;
     background-color: antiquewhite;
+    cursor: pointer;
 }
 
 main p {
@@ -38,4 +39,54 @@ main p {
 
 button {
     display: block;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+
+main {
+    position: relative;
+}
+
+#mutiple-choice-box {
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.choices {
+    width: 20rem;
+    height: 2.5rem;
+    font-size: 1.5em;
+    margin-bottom: 1rem;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px rgb(187, 185, 185);
+    cursor: pointer;
+}
+
+footer {
+    border-top: 5px solid black;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    margin-top: 2.5rem;
+}
+
+footer p {
+    font-size: 1.5em;
+}
+
+#Correct, #Wrong, footer button {
+    display: none;
+}
+
+footer button {
+    float: right;
+    margin-top: 20px;
+    width: 10rem;
+    height: 2rem;
 }
