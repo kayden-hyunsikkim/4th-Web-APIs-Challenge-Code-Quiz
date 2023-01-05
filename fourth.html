@@ -18,18 +18,20 @@
     </header>
     <main>
         <h1>Coding Quiz Challenge </h1>
-        <p>3.questionquestionquestionquestionquestion<br>questionquestionquestionquestionquestion</p>
-        <p>questionquestionquestionquestionquestion</p>
+        <p>3. The ___________ method cancels the event if it is cancelable,<br>
+            meaning that the default action that belongs to the event will not occur</p>
+        <p>For example, this can be useful when: Clicking on a "Submit" button, <br>
+            prevent it from submitting a form.</p>
         <div id="mutiple-choice-box">
-            <button class="choices" onclick="Correct()">A</button>
-            <button class="choices" onclick="Wrong()">B</button>
-            <button class="choices" onclick="Wrong()">C</button>
-            <button class="choices" onclick="Wrong()">D</button>
+            <button class="choices" onclick="Correct()">preventDefault()</button>
+            <button class="choices" onclick="Wrong()">blockDefault()</button>
+            <button class="choices" onclick="Wrong()">stopDefault()</button>
+            <button class="choices" onclick="Wrong()">dropDefault()</button>
         </div>
     </main>
     <footer>
         <p id="Correct">Correct</p>
-        <a href=""><button id="next">next</button></a>
+        <a href="./record.html"><button id="next">next</button></a>
         <p id="Wrong">Wrong - Try again</p>
     </footer>
     <script src="./assets/Quiz1.js"></script>
