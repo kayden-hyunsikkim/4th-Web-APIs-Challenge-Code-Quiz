@@ -1,8 +1,10 @@
 let remainTime = document.querySelector("#timer");
 let startBtn = document.querySelector("#start");
-let main = document.querySelector("#Question");
 let choiceBtns = document.querySelector("#choiceBtns");
-
+let nextBtn = document.querySelector("#next");
+let newDiv = document.querySelector("record-page")
+let main = document.querySelector("#Question");
+let Result = document.querySelector("#result");
 
 let count = 0;
 
@@ -13,7 +15,7 @@ let questions = ["1. JavaScript _______ refers to the process whereby the interp
 
     "3. The ___________ method cancels the event if it is cancelable, meaning that the default action that belongs to the event will not occur. For example, this can be useful when: Clicking on a Submit button, prevent it from submitting a form"]
 
-let choices = {Q1 : ['Hammering','Hoisting','Cutting','Pasting'],   Q2 :['let','var','get','const'], Q3:['preventDefault()','blockDefault()','stopDefault()','dropDefault()']}
+let choices = { Q1: ['Hammering', 'Hoisting', 'Cutting', 'Pasting'], Q2: ['let', 'var', 'get', 'const'], Q3: ['preventDefault()', 'blockDefault()', 'stopDefault()', 'dropDefault()'] }
 
 
 
@@ -37,39 +39,94 @@ function question() {
 }
 
 
-function renderChoice() {
-    for(i=0; i<choices.Q1.length; i++) {
-    let button = document.createElement("button");
-    button.setAttribute('class', 'choices');
-    button.textContent = choices.Q1[i];
-    choiceBtns.appendChild(button); 
+function Q1Choicesorder() {
+    for (i = 0; i < choices.Q1.length; i++) {
+        let button = document.createElement("button");
+        button.setAttribute('class', 'choices');
+        button.textContent = choices.Q1[i];
+        choiceBtns.appendChild(button);
     }
+    choiceBtns.children[0].setAttribute('onclick', 'wrong()');
+    choiceBtns.children[1].setAttribute('onclick', 'correct()');
+    choiceBtns.children[2].setAttribute('onclick', 'wrong()');
+    choiceBtns.children[3].setAttribute('onclick', 'wrong()');
+
 
 }
 
-function Q2Choicesorder() {
-    for(i=0; i < choices.Q2.length; i++){ 
-    let button = document.querySelector("#choiceBtns");
-    button.children[i].textContent = choices.Q2[i];  
+function changeChoices() {
+
+    if(count <=2 ) {
+    for (i = 0; i < choices.Q2.length; i++) {
+        let button = document.querySelector("#choiceBtns");
+        button.children[i].textContent = choices.Q2[i];
+    }
+    choiceBtns.children[0].setAttribute('onclick', 'wrong()');
+    choiceBtns.children[1].setAttribute('onclick', 'wrong()');
+    choiceBtns.children[2].setAttribute('onclick', 'correct()');
+    choiceBtns.children[3].setAttribute('onclick', 'wrong()');
+    
+    }
+
+    else if (count === 3) {
+    for (i = 0; i < choices.Q3.length; i++) {
+        let button = document.querySelector("#choiceBtns");
+        button.children[i].textContent = choices.Q3[i];
+    }
+    choiceBtns.children[0].setAttribute('onclick', 'correct()');
+    choiceBtns.children[1].setAttribute('onclick', 'wrong()');
+    choiceBtns.children[2].setAttribute('onclick', 'wrong()');
+    choiceBtns.children[3].setAttribute('onclick', 'wrong()');
+    }
+    
+    else {
+        choiceBtns.remove();
+        let newDiv = document.createElement("div");
+        newDiv.setAttribute("id","record-page");
+        newDiv.textContent = 'hi';
+        main.appendChild(newDiv);
+        newDiv.setAttribute('style','background-color:yellow;');
+        return;
     }
 }
 
-function Q3Choicesorder() {
-    for(i=0; i < choices.Q3.length; i++){ 
-    let button = document.querySelector("#choiceBtns");
-    button.children[i].textContent = choices.Q3[i];  
-    }
+function correct() {
+    Result.children[0].setAttribute("style", "display : inline-block;");
+    Result.children[2].setAttribute("style", "display : inline-block;");
 }
 
 
+function wrong() {
+    Result.children[1].setAttribute("style", "display : inline-block;");
+    Result.children[2].setAttribute("style", "display : inline-block;");
+}
+
+function recordPage() {
+    newDiv.setAttribute('style','background-color:black;')
+}
 
 
 startBtn.addEventListener("click", timer);
 startBtn.addEventListener("click", question);
-startBtn.addEventListener("click", renderChoice);
+startBtn.addEventListener("click", Q1Choicesorder);
 
-choiceBtns.addEventListener("click", question);
-choiceBtns.addEventListener("click", Q2Choicesorder);
+
+nextBtn.addEventListener("click", question);
+nextBtn.addEventListener("click", changeChoices);
+
+nextBtn.addEventListener("click", function (){
+    Result.setAttribute('style','display: none;')
+});
+choiceBtns.addEventListener("click",function (){
+    Result.setAttribute('style','display: block;')
+});
+
+
+
+
+
+
+
 
 
 
