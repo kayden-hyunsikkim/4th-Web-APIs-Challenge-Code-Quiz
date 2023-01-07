@@ -51,7 +51,7 @@ main {
     position: relative;
 }
 
-#choiceBtns {
+#choiceBtns, #choiceBtns2 {
     margin-top: 5rem;
     display: flex;
     flex-direction: column;
@@ -80,7 +80,7 @@ footer p {
     font-size: 1.5em;
 }
 
-#Correct, #Wrong, footer button {
+.correct, .wrong, footer button{
     display: none;
 }
 
