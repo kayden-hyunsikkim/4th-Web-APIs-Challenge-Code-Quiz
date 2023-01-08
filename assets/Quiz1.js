@@ -2,9 +2,12 @@ let remainTime = document.querySelector("#timer");
 let startBtn = document.querySelector("#start");
 let choiceBtns = document.querySelector("#choiceBtns");
 let nextBtn = document.querySelector("#next");
-var submit2 = document.querySelector("#submit");
+
+
 
 let main = document.querySelector("#Question");
+let H1 = document.querySelector("#h1");
+let P1 = document.querySelector("#p1");
 let Result = document.querySelector("#result");
 
 let count = 0;
@@ -41,17 +44,21 @@ function timer() {
 function question() {
     let i = count;
     main.children[1].textContent = questions[i];
-    startBtn.remove();
     count++;
+    startBtn.setAttribute("style", "display:none;");
 }
 
 
 function Q1Choicesorder() {
+    if (count !== 4) {
+        choiceBtns.setAttribute("style", "display:flex;");
+    }
     for (i = 0; i < choices.Q1.length; i++) {
         let button = document.createElement("button");
         button.setAttribute('class', 'choices');
         button.textContent = choices.Q1[i];
         choiceBtns.appendChild(button);
+
     }
     choiceBtns.children[0].setAttribute('onclick', 'wrong()');
     choiceBtns.children[1].setAttribute('onclick', 'correct()');
@@ -87,47 +94,51 @@ function changeChoices() {
     }
 
     else {
+        for(i = 0; i < choices.Q3.length; i++){
+            choiceBtns.children[0].remove();
+            choiceBtns.setAttribute("style", "display:none;");
+        };
         buildALLDONEpage();
         return;
     }
 }
 
 function buildALLDONEpage() {
-    choiceBtns.remove();
-    main.children[0].remove();
-    main.children[0].remove();
+    H1.setAttribute("style", "display:none;");
+    P1.setAttribute("style", "display:none;");
     let newDiv = document.createElement("div");
     let heading1 = document.createElement("h1");
     let Paragraph1 = document.createElement("p");
-    let Label1 = document.createElement("label");
+    let Form1 = document.createElement("form");
     let Input1 = document.createElement("input");
     let Submit = document.createElement("button");
     newDiv.setAttribute("id", "score-page");
-    Label1.setAttribute("for", "initial")
+    Form1.setAttribute("for", "initial")
     Input1.setAttribute("id", "initial");
     Submit.setAttribute("id", "submit");
     Submit.setAttribute("onclick", "recordPage()");
     heading1.textContent = 'All done!!';
     Paragraph1.textContent = 'your final score is ' + timeLeft + '.';
-    Label1.textContent = "initial : ";
+    Form1.textContent = "initial : ";
     Submit.textContent = "Submit";
     main.appendChild(newDiv);
     newDiv.appendChild(heading1);
     newDiv.appendChild(Paragraph1);
-    newDiv.appendChild(Label1);
-    Label1.appendChild(Input1);
+    newDiv.appendChild(Form1);
+    Form1.appendChild(Input1);
     newDiv.appendChild(Submit);
 }
 
 function recordPage() {
-    
-    main.children[0].remove();
+    let newDiv = document.querySelector("#score-page");
+    newDiv.setAttribute("style", "display:none;");
+
     let recordpage = document.createElement("div")
     let heading2 = document.createElement("h1");
     let ScoreList = document.createElement("ul");
     let Clear = document.createElement("button");
     let Goback = document.createElement("button");
- 
+
     recordpage.setAttribute("id", "record-page");
     ScoreList.setAttribute("id", "initial");
     Clear.setAttribute("id", "clear");
@@ -138,22 +149,34 @@ function recordPage() {
     heading2.textContent = 'High Scores';
     Goback.textContent = "Go-back";
     Clear.textContent = "Clear high score";
-  
+
     main.appendChild(recordpage);
     recordpage.appendChild(heading2);
     recordpage.appendChild(ScoreList);
     recordpage.appendChild(Goback);
     recordpage.appendChild(Clear);
-    
-   
+
 }
 
-function CrearHighScore(){
+function CrearHighScore() {
     console.log("shit");
 }
 
-function Goback(){
+function Goback() {
     console.log("asshole");
+    count = 0;
+    timeLeft = 75;
+    remainTime.innerHTML = "remain time : " + timeLeft;
+    let recordpage = document.querySelector("#record-page");
+
+    startBtn.setAttribute("style", "display:block;");
+    recordpage.setAttribute("style", "display:none;");
+    H1.setAttribute("style", "display:block;");
+    P1.setAttribute("style", "display:block;");
+    P1.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
+
+
+
 }
 
 function correct() {
@@ -166,10 +189,6 @@ function wrong() {
     Result.children[1].setAttribute("style", "display : inline-block;");
     Result.children[2].setAttribute("style", "display : inline-block;");
 }
-
-
-
-
 
 
 
@@ -188,6 +207,8 @@ nextBtn.addEventListener("click", function () {
 choiceBtns.addEventListener("click", function () {
     Result.setAttribute('style', 'display: block;')
 });
+
+
 
 
 

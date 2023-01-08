@@ -117,13 +117,13 @@ footer button {
     width: 300px;
 }
 
-#score-page label {
+#score-page form {
     font-size: 25px;
     margin-left: 40px;
 }
 
 
-#score-page label, #initial, #score-page button {
+#score-page form, #initial, #score-page button {
 display: inline-block;
 }
 
