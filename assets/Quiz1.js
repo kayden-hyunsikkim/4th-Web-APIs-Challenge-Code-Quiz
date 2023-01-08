@@ -2,6 +2,7 @@ let remainTime = document.querySelector("#timer");
 let startBtn = document.querySelector("#start");
 let choiceBtns = document.querySelector("#choiceBtns");
 let nextBtn = document.querySelector("#next");
+var submit2 = document.querySelector("#submit");
 
 let main = document.querySelector("#Question");
 let Result = document.querySelector("#result");
@@ -86,37 +87,74 @@ function changeChoices() {
     }
 
     else {
-       buildALLDONEpage();
+        buildALLDONEpage();
         return;
     }
 }
 
 function buildALLDONEpage() {
     choiceBtns.remove();
-        main.children[0].remove();
-        let newDiv = document.createElement("div");
-        let heading1 = document.createElement("h1");
-        let Paragraph1 = document.createElement("p");
-        let Label1 = document.createElement("label");
-        let Input1 = document.createElement("input");
-        let Submit = document.createElement("button");
-        newDiv.setAttribute("id", "record-page");
-        Label1.setAttribute("for", "initial")
-        Input1.setAttribute("id", "initial");
-        Submit.setAttribute("id", "submit");
-        heading1.textContent = 'All done!!';
-        Paragraph1.textContent = 'your final score is ' + timeLeft + '.';
-        Label1.textContent = "initial : ";
-        Submit.textContent = "Submit";
-        main.appendChild(newDiv);
-        newDiv.appendChild(heading1);
-        newDiv.appendChild(Paragraph1);
-        newDiv.appendChild(Label1);
-        Label1.appendChild(Input1);
-        newDiv.appendChild(Submit);
+    main.children[0].remove();
+    main.children[0].remove();
+    let newDiv = document.createElement("div");
+    let heading1 = document.createElement("h1");
+    let Paragraph1 = document.createElement("p");
+    let Label1 = document.createElement("label");
+    let Input1 = document.createElement("input");
+    let Submit = document.createElement("button");
+    newDiv.setAttribute("id", "score-page");
+    Label1.setAttribute("for", "initial")
+    Input1.setAttribute("id", "initial");
+    Submit.setAttribute("id", "submit");
+    Submit.setAttribute("onclick", "recordPage()");
+    heading1.textContent = 'All done!!';
+    Paragraph1.textContent = 'your final score is ' + timeLeft + '.';
+    Label1.textContent = "initial : ";
+    Submit.textContent = "Submit";
+    main.appendChild(newDiv);
+    newDiv.appendChild(heading1);
+    newDiv.appendChild(Paragraph1);
+    newDiv.appendChild(Label1);
+    Label1.appendChild(Input1);
+    newDiv.appendChild(Submit);
 }
 
+function recordPage() {
+    
+    main.children[0].remove();
+    let recordpage = document.createElement("div")
+    let heading2 = document.createElement("h1");
+    let ScoreList = document.createElement("ul");
+    let Clear = document.createElement("button");
+    let Goback = document.createElement("button");
+ 
+    recordpage.setAttribute("id", "record-page");
+    ScoreList.setAttribute("id", "initial");
+    Clear.setAttribute("id", "clear");
+    Clear.setAttribute("onclick", "CrearHighScore()");
+    Goback.setAttribute("id", "go-back");
+    Goback.setAttribute("onclick", "Goback()");
 
+    heading2.textContent = 'High Scores';
+    Goback.textContent = "Go-back";
+    Clear.textContent = "Clear high score";
+  
+    main.appendChild(recordpage);
+    recordpage.appendChild(heading2);
+    recordpage.appendChild(ScoreList);
+    recordpage.appendChild(Goback);
+    recordpage.appendChild(Clear);
+    
+   
+}
+
+function CrearHighScore(){
+    console.log("shit");
+}
+
+function Goback(){
+    console.log("asshole");
+}
 
 function correct() {
     Result.children[0].setAttribute("style", "display : inline-block;");
@@ -128,6 +166,10 @@ function wrong() {
     Result.children[1].setAttribute("style", "display : inline-block;");
     Result.children[2].setAttribute("style", "display : inline-block;");
 }
+
+
+
+
 
 
 
@@ -146,9 +188,6 @@ nextBtn.addEventListener("click", function () {
 choiceBtns.addEventListener("click", function () {
     Result.setAttribute('style', 'display: block;')
 });
-
-
-
 
 
 
