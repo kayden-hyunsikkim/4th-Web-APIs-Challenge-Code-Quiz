@@ -2,6 +2,7 @@ let remainTime = document.querySelector("#timer");
 let startBtn = document.querySelector("#start");
 let choiceBtns = document.querySelector("#choiceBtns");
 let nextBtn = document.querySelector("#next");
+let viewrecord = document.querySelector("#viewrecord");
 
 let main = document.querySelector("#Question");
 let H1 = document.querySelector("#h1");
@@ -76,7 +77,7 @@ function Q1Choicesorder() {
 }
 
 function changeChoices() {
- 
+
     if (count <= 2) {
         for (i = 0; i < choices.Q2.length; i++) {
             let button = document.querySelector("#choiceBtns");
@@ -112,45 +113,46 @@ function changeChoices() {
 
 function buildALLDONEpage() {
 
-    Result.setAttribute("style","display:none;");
+    Result.setAttribute("style", "display:none;");
 
     if (cycle >= 2) {
         let newDiv = document.querySelector("#alldone-page");
         newDiv.setAttribute("style", "display:block;");
         let Paragraph1 = document.querySelector("#yourscore");
-        Paragraph1.textContent = 'your final score is ' + timeLeft + '.';   
+        Paragraph1.textContent = 'your final score is ' + timeLeft + '.';
     }
 
     if (cycle === 1) {
-    H1.setAttribute("style", "display:none;");
-    P1.setAttribute("style", "display:none;");
-    let newDiv = document.createElement("div");
-    let heading1 = document.createElement("h1");
-    let Paragraph1 = document.createElement("p");
-    let Form1 = document.createElement("form");
-    let Input1 = document.createElement("input");
-    let Submit = document.createElement("button");
-    newDiv.setAttribute("id", "alldone-page");
-    Paragraph1.setAttribute("id", "yourscore");
-    Form1.setAttribute("for", "initial");
-    Input1.setAttribute("id", "initial");
-    Submit.setAttribute("id", "submit");
-    Submit.setAttribute("onclick", "recordPage()");
-    heading1.textContent = 'All done!!';
-    Paragraph1.textContent = 'your final score is ' + timeLeft + '.';
-    Form1.textContent = "initial : ";
-    Submit.textContent = "Submit";
-    main.appendChild(newDiv);
-    newDiv.appendChild(heading1);
-    newDiv.appendChild(Paragraph1);
-    newDiv.appendChild(Form1);
-    Form1.appendChild(Input1);
-    newDiv.appendChild(Submit);
+        H1.setAttribute("style", "display:none;");
+        P1.setAttribute("style", "display:none;");
+        let newDiv = document.createElement("div");
+        let heading1 = document.createElement("h1");
+        let Paragraph1 = document.createElement("p");
+        let Form1 = document.createElement("form");
+        let Input1 = document.createElement("input");
+        let Submit = document.createElement("button");
+        newDiv.setAttribute("id", "alldone-page");
+        newDiv.setAttribute("style", "display:block;");
+        Paragraph1.setAttribute("id", "yourscore");
+        Form1.setAttribute("for", "initial");
+        Input1.setAttribute("id", "initial");
+        Submit.setAttribute("id", "submit");
+        Submit.setAttribute("onclick", "recordPage()");
+        heading1.textContent = 'All done!!';
+        Paragraph1.textContent = 'your final score is ' + timeLeft + '.';
+        Form1.textContent = "initial : ";
+        Submit.textContent = "Submit";
+        main.appendChild(newDiv);
+        newDiv.appendChild(heading1);
+        newDiv.appendChild(Paragraph1);
+        newDiv.appendChild(Form1);
+        Form1.appendChild(Input1);
+        newDiv.appendChild(Submit);
     }
 }
 
 function recordPage() {
-    correctandwrongReset(); 
+    correctandwrongReset();
     if (cycle >= 2) {
         let newDiv = document.querySelector("#alldone-page");
         newDiv.setAttribute("style", "display:none;");
@@ -160,67 +162,85 @@ function recordPage() {
         let ScoreListItem2 = document.createElement("li");
         let UserInitial = document.querySelector("#initial");
         let Initial = UserInitial.value;
-        ScoreListItem2.textContent = Initial +" - "+ timeLeft;
+        ScoreListItem2.textContent = Initial + " - " + timeLeft;
         ScoreListItem.append(ScoreListItem2);
     }
 
     if (cycle === 1) {
-    let newDiv = document.querySelector("#alldone-page");
-    newDiv.setAttribute("style", "display:none;");
+        let newDiv = document.querySelector("#alldone-page");
+        newDiv.setAttribute("style", "display:none;");
 
-    let recordpage = document.createElement("div")
-    let heading2 = document.createElement("h1");
-    let ScoreList = document.createElement("ol");
-    let ScoreListItem = document.createElement("li");
-    let Clear = document.createElement("button");
-    let Goback = document.createElement("button");
+        let recordpage = document.createElement("div")
+        let heading2 = document.createElement("h1");
+        let ScoreList = document.createElement("ol");
+        let ScoreListItem = document.createElement("li");
+        let Clear = document.createElement("button");
+        let Goback = document.createElement("button");
 
-    let UserInitial = document.querySelector("#initial");
-    let Initial = UserInitial.value;
+        let UserInitial = document.querySelector("#initial");
+        let Initial = UserInitial.value;
 
 
-    recordpage.setAttribute("id", "record-page");
-    ScoreList.setAttribute("id", "initialList");
-    ScoreListItem.setAttribute("id", "scorelist");
-    Clear.setAttribute("id", "clear");
-    Clear.setAttribute("onclick", "CrearHighScore()");
-    Goback.setAttribute("id", "go-back");
-    Goback.setAttribute("onclick", "Goback()");
+        recordpage.setAttribute("id", "record-page");
+        ScoreList.setAttribute("id", "initialList");
+        ScoreListItem.setAttribute("id", "scorelist");
+        Clear.setAttribute("id", "clear");
+        Clear.setAttribute("onclick", "CrearHighScore()");
+        Goback.setAttribute("id", "go-back");
+        Goback.setAttribute("onclick", "Goback()");
 
-    
-    heading2.textContent = 'High Scores';
-    Goback.textContent = "Go-back";
-    Clear.textContent = "Clear high score";
-    ScoreListItem.textContent = Initial +" - "+ timeLeft;
 
-    main.appendChild(recordpage);
-    recordpage.appendChild(heading2);
-    recordpage.appendChild(ScoreList);
-    ScoreList.appendChild(ScoreListItem);
-    recordpage.appendChild(Goback);
-    recordpage.appendChild(Clear);
+        heading2.textContent = 'High Scores';
+        Goback.textContent = "Go-back";
+        Clear.textContent = "Clear high score";
+        ScoreListItem.textContent = Initial + " - " + timeLeft;
+
+        main.appendChild(recordpage);
+        recordpage.appendChild(heading2);
+        recordpage.appendChild(ScoreList);
+        ScoreList.appendChild(ScoreListItem);
+        recordpage.appendChild(Goback);
+        recordpage.appendChild(Clear);
     }
 
 }
 
 function CrearHighScore() {
-    console.log("shit");
+    let ScoreListItem = document.querySelector("#scorelist");
+    ScoreListItem.textContent = " ";
+    ScoreListItem.setAttribute("style", "display:none")
+    cycle = 0;
 }
 
 function Goback() {
     count = 0;
     timeLeft = 75;
     remainTime.innerHTML = "remain time : " + timeLeft;
-    let recordpage = document.querySelector("#record-page");
-    recordpage.setAttribute("style", "display:none;");
-    startBtn.setAttribute("style", "display:block;");
-    H1.setAttribute("style", "display:block;");
-    P1.setAttribute("style", "display:block;");
-    
-    P1.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
-    let UserInitial = document.querySelector("#initial");
-    UserInitial.value = " ";
-    cycle++;
+
+    if (cycle === 0) {
+        let removeAlldonepage = document.querySelector("#alldone-page");
+        removeAlldonepage.remove();
+        let removerecordpage = document.querySelector("#record-page");
+        removerecordpage.remove();
+        H1.setAttribute("style", "display:block;");
+        P1.setAttribute("style", "display:block;");
+        P1.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
+        startBtn.setAttribute("style", "display:block;");
+        cycle++;
+
+    } else {
+
+        let recordpage = document.querySelector("#record-page");
+        recordpage.setAttribute("style", "display:none;");
+        startBtn.setAttribute("style", "display:block;");
+        H1.setAttribute("style", "display:block;");
+        P1.setAttribute("style", "display:block;");
+
+        P1.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
+        let UserInitial = document.querySelector("#initial");
+        UserInitial.value = " ";
+        cycle++;
+    }
 
 
 }
@@ -229,8 +249,8 @@ function correct() {
     // initialising line wrong attribute(otherwise it shows correct and wrong at the same time when user try again)//
     Wrong.setAttribute("style", "display : none;");
     //--------------------------------------------------------------------------------------------------------------//
-    Result.setAttribute("style", "display : block;"); 
-    Correct.setAttribute("style", "display : inline-block;"); 
+    Result.setAttribute("style", "display : block;");
+    Correct.setAttribute("style", "display : inline-block;");
     question();
     changeChoices();
 }
@@ -240,8 +260,8 @@ function wrong() {
     // initialising line correct attribute(otherwise it shows correct and wrong at the same time when user try again)//
     Correct.setAttribute("style", "display : none;");
     //--------------------------------------------------------------------------------------------------------------//
-    Result.setAttribute("style", "display : block;"); 
-    Wrong.setAttribute("style", "display : inline-block;"); 
+    Result.setAttribute("style", "display : block;");
+    Wrong.setAttribute("style", "display : inline-block;");
     timeLeft = timeLeft - 10; //penalty of time(score)
     question();
     changeChoices();
@@ -256,7 +276,14 @@ function correctandwrongReset() {
 //---------------------------------------------------------------------//
 
 
-
+function viewRecord() {
+    if (cycle > 1) {
+        let recordpage = document.querySelector("#record-page");
+        recordpage.setAttribute("style", "display:block");
+    } else {
+        alert("There is no record yet");
+    }
+}
 
 
 
