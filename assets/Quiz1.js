@@ -35,7 +35,7 @@ startBtn.addEventListener("click", Q1Choicesorder);
 function timer() {
     timeInterval = setInterval(() => {
         remainTime.innerHTML = "remain time : " + timeLeft;
-
+        timeLeft--;
 
         if (timeLeft === 0) {
             clearInterval(timeInterval);
@@ -44,7 +44,7 @@ function timer() {
         if (count > 3) {
             clearInterval(timeInterval);
         }
-        timeLeft--;
+
 
     }, 1000)
 }
@@ -113,8 +113,6 @@ function changeChoices() {
 
 function buildALLDONEpage() {
 
-    Result.setAttribute("style", "display:none;");
-
     if (cycle >= 2) {
         let newDiv = document.querySelector("#alldone-page");
         newDiv.setAttribute("style", "display:block;");
@@ -152,6 +150,8 @@ function buildALLDONEpage() {
 }
 
 function recordPage() {
+
+    Result.setAttribute("style", "display:none;");
     correctandwrongReset();
     if (cycle >= 2) {
         let newDiv = document.querySelector("#alldone-page");
@@ -206,9 +206,11 @@ function recordPage() {
 }
 
 function CrearHighScore() {
+    let ScoreList = document.querySelector("ol");
     let ScoreListItem = document.querySelector("#scorelist");
     ScoreListItem.textContent = " ";
-    ScoreListItem.setAttribute("style", "display:none")
+    ScoreListItem.setAttribute("style", "display:none");
+    ScoreList.setAttribute("style", "display:none");
     cycle = 0;
 }
 

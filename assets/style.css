@@ -48,6 +48,12 @@ a {
     cursor: pointer;
 }
 
+ol {
+    margin-left: 30px;
+    margin-right: 30px;
+    font-size: 30px;
+    border: 3px solid black;
+}
 
 
 main {
