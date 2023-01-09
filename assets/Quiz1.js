@@ -117,7 +117,10 @@ function buildALLDONEpage() {
     if (cycle >= 2) {
         let newDiv = document.querySelector("#alldone-page");
         newDiv.setAttribute("style", "display:block;");
+        let Paragraph1 = document.querySelector("#yourscore");
+        Paragraph1.textContent = 'your final score is ' + timeLeft + '.';   
     }
+
     if (cycle === 1) {
     H1.setAttribute("style", "display:none;");
     P1.setAttribute("style", "display:none;");
@@ -128,7 +131,8 @@ function buildALLDONEpage() {
     let Input1 = document.createElement("input");
     let Submit = document.createElement("button");
     newDiv.setAttribute("id", "alldone-page");
-    Form1.setAttribute("for", "initial")
+    Paragraph1.setAttribute("id", "yourscore");
+    Form1.setAttribute("for", "initial");
     Input1.setAttribute("id", "initial");
     Submit.setAttribute("id", "submit");
     Submit.setAttribute("onclick", "recordPage()");
@@ -146,20 +150,18 @@ function buildALLDONEpage() {
 }
 
 function recordPage() {
-    correctandwrongReset();
-
-    
+    correctandwrongReset(); 
     if (cycle >= 2) {
         let newDiv = document.querySelector("#alldone-page");
         newDiv.setAttribute("style", "display:none;");
         let recordpage = document.querySelector("#record-page");
         recordpage.setAttribute("style", "display:block;");
-        let ScoreListItem = document.querySelector("li");
-        let ScoreList = document.querySelector("initialList");
+        let ScoreListItem = document.querySelector("#scorelist");
+        let ScoreListItem2 = document.createElement("li");
         let UserInitial = document.querySelector("#initial");
         let Initial = UserInitial.value;
-        ScoreListItem.textContent = Initial +" - "+ timeLeft;
-        ScoreListItem.append(ScoreListItem);
+        ScoreListItem2.textContent = Initial +" - "+ timeLeft;
+        ScoreListItem.append(ScoreListItem2);
     }
 
     if (cycle === 1) {
@@ -179,6 +181,7 @@ function recordPage() {
 
     recordpage.setAttribute("id", "record-page");
     ScoreList.setAttribute("id", "initialList");
+    ScoreListItem.setAttribute("id", "scorelist");
     Clear.setAttribute("id", "clear");
     Clear.setAttribute("onclick", "CrearHighScore()");
     Goback.setAttribute("id", "go-back");
@@ -213,7 +216,10 @@ function Goback() {
     startBtn.setAttribute("style", "display:block;");
     H1.setAttribute("style", "display:block;");
     P1.setAttribute("style", "display:block;");
+    
     P1.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
+    let UserInitial = document.querySelector("#initial");
+    UserInitial.value = " ";
     cycle++;
 
 
