@@ -159,7 +159,7 @@ function recordPage() {
         let UserInitial = document.querySelector("#initial");
         let Initial = UserInitial.value;
         ScoreListItem.textContent = Initial +" - "+ timeLeft;
-        ScoreListItem.append(ScoreListItem);
+        ScoreListItem.appendchild(ScoreList);
     }
 
     if (cycle === 1) {
