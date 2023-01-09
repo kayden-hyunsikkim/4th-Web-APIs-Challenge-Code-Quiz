@@ -35,7 +35,7 @@ h1 {
 }
 
 main p {
-    font-size: 2.5em;
+    font-size: 2.9em;
     text-align: center;
 }
 
@@ -82,9 +82,11 @@ footer p {
     font-size: 1.5em;
 }
 
-.correct, .wrong, footer button{
+#result, .correct, .wrong, footer button{
     display: none;
 }
+
+
 
 footer button {
     font-weight: bolder;
@@ -100,7 +102,7 @@ footer button {
     box-shadow: 5px 5px 5px rgb(187, 185, 185);
 }
 
-#score-page, #record-page {
+#alldone-page, #record-page {
     border: 5px solid black;
     width: 30rem;
     height: 30rem;
@@ -108,7 +110,7 @@ footer button {
     margin-top: 100px;
 }
 
-#score-page h1, #score-page p {
+#alldone-page h1, #alldone-page p {
     text-align: left;
     margin-left: 40px;
 }
@@ -117,13 +119,13 @@ footer button {
     width: 300px;
 }
 
-#score-page form {
+#alldone-page form {
     font-size: 25px;
     margin-left: 40px;
 }
 
 
-#score-page form, #initial, #score-page button {
+#alldone-page form, #initial, #alldone-page button {
 display: inline-block;
 }
 
