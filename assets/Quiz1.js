@@ -14,7 +14,7 @@ let Wrong = document.querySelector(".wrong");
 
 let count = 0;
 let cycle = 1;
-let timeLeft = 75;
+let timeLeft = 5;
 
 
 
@@ -41,6 +41,9 @@ function timer() {
 
         if (timeLeft === 0) {
             clearInterval(timeInterval);
+            buildYouFailpage();
+            buildALLDONEpage();
+            return;
         } // --> timer off when the left time is 0.
 
         if (count > 3) {
@@ -231,6 +234,7 @@ function recordPage() {
 // --> when it is on second cyle or more, it will just call record-page which is already made on first cycle
 // --> and adds only the user's initial and score on score board.
 
+
 function CrearHighScore() {
     let ScoreList = document.querySelector("ol");
     ScoreList.setAttribute("style", "display:none");
@@ -329,7 +333,16 @@ function viewRecord() {
 
 
 
+function buildYouFailpage() {
+    for (i = 0; i < choices.Q3.length; i++) {
+        choiceBtns.children[0].remove();
+        choiceBtns.setAttribute("style", "display:none;");
+    };
 
+    //let AlldonePage = document.querySelector("#alldone-page");
+    //AlldonePage.children[0].textContent = " You Failed!!"
+    
+}
 
 
 
