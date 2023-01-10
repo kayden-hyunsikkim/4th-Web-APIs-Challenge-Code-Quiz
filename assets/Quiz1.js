@@ -11,9 +11,12 @@ let Result = document.querySelector("#result");
 let Correct = document.querySelector(".correct");
 let Wrong = document.querySelector(".wrong");
 
+
 let count = 0;
 let cycle = 1;
 let timeLeft = 75;
+
+
 
 
 let questions = ["1. JavaScript _______ refers to the process whereby the interpreter appears to move the declaration of functions, variables or classes to the top of their scope, prior to execution of ths code.",
@@ -25,7 +28,7 @@ let questions = ["1. JavaScript _______ refers to the process whereby the interp
 let choices = { Q1: ['Hammering', 'Hoisting', 'Cutting', 'Pasting'], Q2: ['let', 'var', 'get', 'const'], Q3: ['preventDefault()', 'blockDefault()', 'stopDefault()', 'dropDefault()'] }
 
 
-
+// ------------actions when startbutton is clicked----------//
 startBtn.addEventListener("click", timer);
 startBtn.addEventListener("click", question);
 startBtn.addEventListener("click", Q1Choicesorder);
@@ -35,15 +38,19 @@ startBtn.addEventListener("click", Q1Choicesorder);
 function timer() {
     timeInterval = setInterval(() => {
         remainTime.innerHTML = "remain time : " + timeLeft;
-        timeLeft--;
 
         if (timeLeft === 0) {
             clearInterval(timeInterval);
-        }
+        } // --> timer off when the left time is 0.
 
         if (count > 3) {
             clearInterval(timeInterval);
-        }
+            return;
+        } // --> timer off when the quiz is done(when user arrive on alldone page).
+        // --> it should be finished before one more timeLeft--; 
+        //--> otherwise when call timeLeft on recordpage, timeLeft will be 1 second less than the timeLeft on score page.
+
+        timeLeft--;
 
 
     }, 1000)
@@ -55,30 +62,38 @@ function question() {
     P1.textContent = questions[i];
     count++;
     startBtn.setAttribute("style", "display:none;");
-}
-
+} //--> count starts from 0 so call a question in question array in order.
+//--> hiding startBtn when quiz starts. 
+//--> The reason why the count++ is added, index of question array starts from 0 but what we see for questions starts from 1.
+//-->
 
 function Q1Choicesorder() {
-    if (count !== 4) {
-        choiceBtns.setAttribute("style", "display:flex;");
-    }
+
+    choiceBtns.setAttribute("style", "display:flex;");
+    //--> when count becomes 4 that alldonepage pops up, all the buttons for choices will be removed.
+    //--> so when the count become 1 which the first question of quiz starts set the buttons display as a flex.
+    //--> it doesn't have to be given when count becomes 2,3 because the style attribute already set up before.
+
     for (i = 0; i < choices.Q1.length; i++) {
         let button = document.createElement("button");
         button.setAttribute('class', 'choices');
         button.textContent = choices.Q1[i];
         choiceBtns.appendChild(button);
     }
+    //--> when count is 0 like first try or greater than or equal to that second cycle, make the new buttons for choice.
+    //--> because all the buttons will be removed when count become 4 that alldonepage pops up 
+
     choiceBtns.children[0].setAttribute('onclick', 'wrong()');
     choiceBtns.children[1].setAttribute('onclick', 'correct()');
     choiceBtns.children[2].setAttribute('onclick', 'wrong()');
     choiceBtns.children[3].setAttribute('onclick', 'wrong()');
-
+    // --> set each buttons' attribute as onclick so that call correct or wrong functions when it's clicked.
 
 }
 
 function changeChoices() {
-
-    if (count <= 2) {
+    //--> used if statement because question2 and question3's object elements are different//
+    if (count === 2) {
         for (i = 0; i < choices.Q2.length; i++) {
             let button = document.querySelector("#choiceBtns");
             button.children[i].textContent = choices.Q2[i];
@@ -87,8 +102,8 @@ function changeChoices() {
         choiceBtns.children[1].setAttribute('onclick', 'wrong()');
         choiceBtns.children[2].setAttribute('onclick', 'correct()');
         choiceBtns.children[3].setAttribute('onclick', 'wrong()');
-
-    }
+    } // --> because when count was 1 (while executing Q1Choicesorder function), all the buttons already made,
+    // --> so it only needs is setting each buttons' attribute as onclick so that call correct or wrong functions when it's clicked.
 
     else if (count === 3) {
         for (i = 0; i < choices.Q3.length; i++) {
@@ -108,29 +123,25 @@ function changeChoices() {
         };
         buildALLDONEpage();
         return;
+        //--> when count becomes 4, all the buttons is removed. because when it is on second cycle or more
+        //    the count will be reset to 0 so it will make all new buttons again
     }
 }
 
 function buildALLDONEpage() {
 
-    if (cycle >= 2) {
-        let newDiv = document.querySelector("#alldone-page");
-        newDiv.setAttribute("style", "display:block;");
-        let Paragraph1 = document.querySelector("#yourscore");
-        Paragraph1.textContent = 'your final score is ' + timeLeft + '.';
-    }
+    H1.setAttribute("style", "display:none;"); // ---> hide h1(Coding Quiz Challenge)
+    P1.setAttribute("style", "display:none;"); // ---> hide p element(Try to answer~~)
 
     if (cycle === 1) {
-        H1.setAttribute("style", "display:none;");
-        P1.setAttribute("style", "display:none;");
-        let newDiv = document.createElement("div");
+        let AlldonePage = document.createElement("div");
         let heading1 = document.createElement("h1");
         let Paragraph1 = document.createElement("p");
         let Form1 = document.createElement("form");
         let Input1 = document.createElement("input");
         let Submit = document.createElement("button");
-        newDiv.setAttribute("id", "alldone-page");
-        newDiv.setAttribute("style", "display:block;");
+        AlldonePage.setAttribute("id", "alldone-page");
+        AlldonePage.setAttribute("style", "display:block;");
         Paragraph1.setAttribute("id", "yourscore");
         Form1.setAttribute("for", "initial");
         Input1.setAttribute("id", "initial");
@@ -140,36 +151,37 @@ function buildALLDONEpage() {
         Paragraph1.textContent = 'your final score is ' + timeLeft + '.';
         Form1.textContent = "initial : ";
         Submit.textContent = "Submit";
-        main.appendChild(newDiv);
-        newDiv.appendChild(heading1);
-        newDiv.appendChild(Paragraph1);
-        newDiv.appendChild(Form1);
+        main.appendChild(AlldonePage);
+        AlldonePage.appendChild(heading1);
+        AlldonePage.appendChild(Paragraph1);
+        AlldonePage.appendChild(Form1);
         Form1.appendChild(Input1);
-        newDiv.appendChild(Submit);
+        AlldonePage.appendChild(Submit);
+    }
+
+    if (cycle >= 2) {
+        let AlldonePage = document.querySelector("#alldone-page");
+        AlldonePage.setAttribute("style", "display:block;");
+        let Paragraph1 = document.querySelector("#yourscore");
+        Paragraph1.textContent = 'your final score is ' + timeLeft + '.';
     }
 }
 
-function recordPage() {
+// --> when it is on first cycle, it will make all the elements in alldone-page.
+// --> when it is on second cyle or more, it will just call alldone-page which is already made on first cycle
+// --> and changes only the score part which is related on timeLeft. 
 
+
+
+
+
+function recordPage() {
     Result.setAttribute("style", "display:none;");
+    let AlldonePage = document.querySelector("#alldone-page");
+    AlldonePage.setAttribute("style", "display:none;");
     correctandwrongReset();
-    if (cycle >= 2) {
-        let newDiv = document.querySelector("#alldone-page");
-        newDiv.setAttribute("style", "display:none;");
-        let recordpage = document.querySelector("#record-page");
-        recordpage.setAttribute("style", "display:block;");
-        let ScoreListItem = document.querySelector("#scorelist");
-        let ScoreListItem2 = document.createElement("li");
-        let UserInitial = document.querySelector("#initial");
-        let Initial = UserInitial.value;
-        ScoreListItem2.textContent = Initial + " - " + timeLeft;
-        ScoreListItem.append(ScoreListItem2);
-    }
 
     if (cycle === 1) {
-        let newDiv = document.querySelector("#alldone-page");
-        newDiv.setAttribute("style", "display:none;");
-
         let recordpage = document.createElement("div")
         let heading2 = document.createElement("h1");
         let ScoreList = document.createElement("ol");
@@ -203,33 +215,53 @@ function recordPage() {
         recordpage.appendChild(Clear);
     }
 
+    if (cycle >= 2) {
+        let recordpage = document.querySelector("#record-page");
+        recordpage.setAttribute("style", "display:block;");
+        let ScoreListItem = document.querySelector("#scorelist");
+        let ScoreListItem2 = document.createElement("li");
+        let UserInitial = document.querySelector("#initial");
+        let Initial = UserInitial.value;
+        ScoreListItem2.textContent = Initial + " - " + timeLeft;
+        ScoreListItem.append(ScoreListItem2);
+    }
+
 }
+// --> when it is on first cycle, it will make all the elements in record-page.
+// --> when it is on second cyle or more, it will just call record-page which is already made on first cycle
+// --> and adds only the user's initial and score on score board.
 
 function CrearHighScore() {
     let ScoreList = document.querySelector("ol");
+    ScoreList.setAttribute("style", "display:none");
     let ScoreListItem = document.querySelector("#scorelist");
     ScoreListItem.textContent = " ";
     ScoreListItem.setAttribute("style", "display:none");
-    ScoreList.setAttribute("style", "display:none");
     cycle = 0;
 }
+
+// --> when the clearhighscore button is clicked, hides ol, li element and changes the text inside of li element to ' '. 
+// --> reset cycle to 0 to prevent the cycle going big number (to make a loop).
+// --> cycle will always be +1 when the goback button is clicked. so needed to reset to 0 not 1.
+
 
 function Goback() {
     count = 0;
     timeLeft = 75;
-    remainTime.innerHTML = "remain time : " + timeLeft;
+    remainTime.innerHTML = "remain time : 0";
+    // --> reset count to 0 which is initial count to make infinite loop
+    // --> reset timeLeft to 75 which is initial timeLeft
+    // --> put "remain time : 0" which is first page shows into p element
 
     if (cycle === 0) {
-        let removeAlldonepage = document.querySelector("#alldone-page");
-        removeAlldonepage.remove();
-        let removerecordpage = document.querySelector("#record-page");
-        removerecordpage.remove();
+        let AlldonePage = document.querySelector("#alldone-page");
+        AlldonePage.remove();
+        let recordpage = document.querySelector("#record-page");
+        recordpage.remove();
         H1.setAttribute("style", "display:block;");
         P1.setAttribute("style", "display:block;");
         P1.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
         startBtn.setAttribute("style", "display:block;");
-        cycle++;
-
     } else {
 
         let recordpage = document.querySelector("#record-page");
@@ -241,9 +273,14 @@ function Goback() {
         P1.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
         let UserInitial = document.querySelector("#initial");
         UserInitial.value = " ";
-        cycle++;
     }
 
+    cycle++;
+
+    // --> cycle === 0 means user clicked clear high score button.
+    // --> when cycle starts from 0 (go back button make cycle +1), all the functions related to pages will make fresh new page again.
+    // --> so it remove all the pages that was made before.
+    // --> In other cases, it will just turn on or off page or elements to go back to first page.
 
 }
 
@@ -278,6 +315,7 @@ function correctandwrongReset() {
 //---------------------------------------------------------------------//
 
 
+//---- show record page when user click view record text ---// 
 function viewRecord() {
     if (cycle > 1) {
         let recordpage = document.querySelector("#record-page");
@@ -286,6 +324,8 @@ function viewRecord() {
         alert("There is no record yet");
     }
 }
+// --> when cycle > 1 means at least 1 score stored in record page so just show the record page.
+// --> In other case, when cycle is 1 , that means user clicked clear high score button. so alert window pops up.
 
 
 
