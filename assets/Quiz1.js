@@ -14,8 +14,7 @@ let Wrong = document.querySelector(".wrong");
 
 let count = 0;
 let cycle = 1;
-let timeLeft = 5;
-
+let timeLeft = 75;
 
 
 
@@ -25,7 +24,7 @@ let questions = ["1. JavaScript _______ refers to the process whereby the interp
 
     "3. The ___________ method cancels the event if it is cancelable, meaning that the default action that belongs to the event will not occur. For example, this can be useful when: Clicking on a Submit button, prevent it from submitting a form"]
 
-let choices = { Q1: ['Hammering', 'Hoisting', 'Cutting', 'Pasting'], Q2: ['let', 'var', 'get', 'const'], Q3: ['preventDefault()', 'blockDefault()', 'stopDefault()', 'dropDefault()'] }
+let choices = { Q1: ['Hammering', 'Hoisting', 'Cutting', 'Pasting'], Q2: ['let', 'var', 'get', 'const'], Q3: ['event.preventDefault()', 'event.blockDefault()', 'event.stopDefault()', 'event.dropDefault()'] }
 
 
 // ------------actions when startbutton is clicked----------//
