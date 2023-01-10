@@ -40,7 +40,7 @@ function timer() {
 
         if (timeLeft === 0) {
             clearInterval(timeInterval);
-            buildYouFailpage();
+            deletemadeBtns();
             buildALLDONEpage();
             return;
         } // --> timer off when the left time is 0.
@@ -331,18 +331,15 @@ function viewRecord() {
 // --> In other case, when cycle is 1 , that means user clicked clear high score button. so alert window pops up.
 
 
-
-function buildYouFailpage() {
+// ---> deleting already made buttons for choices -----//
+function deletemadeBtns() {
     for (i = 0; i < choices.Q3.length; i++) {
         choiceBtns.children[0].remove();
         choiceBtns.setAttribute("style", "display:none;");
-    };
-
-    //let AlldonePage = document.querySelector("#alldone-page");
-    //AlldonePage.children[0].textContent = " You Failed!!"
-    
+    }; 
 }
-
+// ---> when timeLeft is 0, it means it skips the action which is in changechoices function when the count is 4
+// ---> so this is the function for deleting the buttons as same as the action when count is 4 in changechoices function
 
 
 
