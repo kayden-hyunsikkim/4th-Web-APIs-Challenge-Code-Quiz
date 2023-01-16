@@ -12,6 +12,7 @@ let Correct = document.querySelector(".correct");
 let Wrong = document.querySelector(".wrong");
 
 
+
 let count = 0;
 let cycle = 1;
 let timeLeft = 75;
@@ -167,6 +168,7 @@ function buildALLDONEpage() {
         let Paragraph1 = document.querySelector("#yourscore");
         Paragraph1.textContent = 'your final score is ' + timeLeft + '.';
     }
+
 }
 
 // --> when it is on first cycle, it will make all the elements in alldone-page.
@@ -227,6 +229,7 @@ function recordPage() {
         ScoreListItem2.textContent = Initial + " - " + timeLeft;
         ScoreListItem.append(ScoreListItem2);
     }
+    localStorage.setItem('user-score',timeLeft); // --> saving user's score.
 
 }
 // --> when it is on first cycle, it will make all the elements in record-page.
