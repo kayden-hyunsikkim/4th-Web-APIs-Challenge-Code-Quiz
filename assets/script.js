@@ -217,6 +217,7 @@ function recordPage() {
         ScoreList.appendChild(ScoreListItem);
         recordpage.appendChild(Goback);
         recordpage.appendChild(Clear);
+        localStorage.setItem('user-Initial', Initial); // --> saving user's Initial.
     }
 
     if (cycle >= 2) {
@@ -228,8 +229,9 @@ function recordPage() {
         let Initial = UserInitial.value;
         ScoreListItem2.textContent = Initial + " - " + timeLeft;
         ScoreListItem.append(ScoreListItem2);
+        localStorage.setItem('user-Initial', Initial); // --> saving user's Initial.
     }
-    localStorage.setItem('user-Initial', Initial); // --> saving user's Initial.
+    
     localStorage.setItem('user-score', timeLeft); // --> saving user's score.
 
 }
@@ -245,6 +247,7 @@ function CrearHighScore() {
     ScoreListItem.textContent = " ";
     ScoreListItem.setAttribute("style", "display:none");
     cycle = 0;
+    localStorage.clear();
 }
 
 // --> when the clearhighscore button is clicked, hides ol, li element and changes the text inside of li element to ' '. 
