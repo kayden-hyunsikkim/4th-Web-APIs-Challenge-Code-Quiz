@@ -229,7 +229,8 @@ function recordPage() {
         ScoreListItem2.textContent = Initial + " - " + timeLeft;
         ScoreListItem.append(ScoreListItem2);
     }
-    localStorage.setItem('user-score',timeLeft); // --> saving user's score.
+    localStorage.setItem('user-Initial', Initial); // --> saving user's Initial.
+    localStorage.setItem('user-score', timeLeft); // --> saving user's score.
 
 }
 // --> when it is on first cycle, it will make all the elements in record-page.
